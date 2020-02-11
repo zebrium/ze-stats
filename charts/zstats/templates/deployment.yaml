@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "zstats-collector.fullname" . }}
+  labels:
+    app: {{ template "zstats-collector.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ template "zstats-collector.name" . }}
+  replicas: 1
+  template:
+    metadata:
+      name: {{ template "zstats-collector.fullname" . }}
+      labels:
+        app: {{ template "zstats-collector.name" . }}
+        release: {{ .Release.Name }}
+    spec:
+      serviceAccountName: {{ template "zstats-collector.fullname" . }}
+      containers:
+        - name: {{ template "zstats-collector.fullname" . }}
+          image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"
+          imagePullPolicy: IfNotPresent
+          args:
+            - "--config.file=/etc/prometheus/prometheus.yml"
+            - "--storage.tsdb.path=/prometheus/"
+#           - "--zebrium.server-url=http://127.0.0.1:5400/api/v1/zstats"
+#           - "--zebrium.zapi-token=AJAYAJAYAJAYAJAYAJAYAJAYAJAYAJAYAJAYAJAY"
+            - "--zebrium.max-queue-depth=2"
+            - "--zebrium.insecure-ssl"
+          ports:
+            - containerPort: 9090
+          env:
+            - name: ZE_STATS_COLLECTOR_URL
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "zstats-collector.fullname" . }}-config
+                  key: stats-collector-url
+            - name: ZE_STATS_COLLECTOR_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "zstats-collector.fullname" . }}-config
+                  key: auth-token
+            - name: ZE_DEPLOYMENT_NAME
+              value: "{{ .Values.zebrium.deployment }}"
+          volumeMounts:
+            - name: prometheus-config-volume
+              mountPath: /etc/prometheus/
+            - name: prometheus-storage-volume
+              mountPath: /prometheus/
+      volumes:
+        - name: prometheus-config-volume
+          configMap:
+            defaultMode: 420
+            name: {{ template "zstats-collector.fullname" . }}-server-conf
+
+        - name: prometheus-storage-volume
+          emptyDir: {}

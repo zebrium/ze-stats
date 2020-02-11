@@ -1,0 +1,13 @@
+{{- if not .Values.zebrium.authToken -}}
+#############################################################
+###  ERROR: Please specify an authentication token        ###
+#############################################################
+
+helm install {{ .Release.Name }} \
+  --set zebrium.collectorUrl=ZE_STATS_URL,zebrium.authToken=YOUR_ZE_STATS_AUTH_TOKEN zstats-collector
+
+{{- else -}}
+
+Zebrium stats collector are being deployed.
+
+{{- end }}

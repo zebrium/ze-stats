@@ -1,0 +1,23 @@
+image:
+  name: zebrium/zstats
+  tag: latest
+  pullPolicy: Always
+
+# Extra environment variables to set for log collector container
+extraEnv: []
+
+zebrium:
+  deployment: ""
+  collectorUrl: ""
+  authToken: ""
+  autoupdate: "0"
+  name: zstats-collector
+
+resources:
+  requests:
+    cpu: 20m
+    memory: 500Mi
+  limits:
+    memory: 1Gi
+
+updateStrategy: OnDelete
