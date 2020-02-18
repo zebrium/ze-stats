@@ -7,9 +7,8 @@ metadata:
 data:
   prometheus.yml: |-
     global:
-      scrape_interval: 60s
-      evaluation_interval: 60s
-
+      scrape_interval: "{{ .Values.prometheus.scrapeInterval }}"
+      evaluation_interval: "{{ .Values.prometheus.evaluationInterval }}"
     scrape_configs:
       - job_name: 'kubernetes-apiservers'
         kubernetes_sd_configs:

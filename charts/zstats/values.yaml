@@ -3,8 +3,9 @@ image:
   tag: latest
   pullPolicy: Always
 
-# Extra environment variables to set for log collector container
-extraEnv: []
+prometheus:
+  scrapeInterval: "60s"
+  evaluationInterval: "60s"
 
 zebrium:
   deployment: ""
