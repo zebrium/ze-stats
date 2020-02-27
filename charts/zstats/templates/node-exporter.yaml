@@ -36,7 +36,7 @@ spec:
         args:
           - --path.procfs=/host/proc
           - --path.sysfs=/host/sys
-          - --web.listen-address=0.0.0.0:{{ .Values.nodeExporter.port }}
+          - --web.listen-address=0.0.0.0:{{ .Values.nodeExporter.targetPort }}
         ports:
         - name: scrape
           containerPort: {{ .Values.nodeExporter.targetPort }}
