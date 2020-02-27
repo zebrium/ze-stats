@@ -7,11 +7,24 @@ prometheus:
   scrapeInterval: "60s"
   evaluationInterval: "60s"
 
+nodeExporter:
+  enabled: true
+  port: 9100
+  targetPort: 9100
+  resources:
+    limits:
+      cpu: 200m
+      memory: 50Mi
+    requests:
+      cpu: 100m
+      memory: 30Mi
+
 zebrium:
   deployment: ""
   collectorUrl: ""
   authToken: ""
   autoupdate: "0"
+  verifySSL: true
   name: zstats-collector
 
 resources:
@@ -19,6 +32,7 @@ resources:
     cpu: 20m
     memory: 500Mi
   limits:
+    cpu: 200m
     memory: 1Gi
 
 updateStrategy: OnDelete

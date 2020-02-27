@@ -27,10 +27,9 @@ spec:
           args:
             - "--config.file=/etc/prometheus/prometheus.yml"
             - "--storage.tsdb.path=/prometheus/"
-#           - "--zebrium.server-url=http://127.0.0.1:5400/api/v1/zstats"
-#           - "--zebrium.zapi-token=AJAYAJAYAJAYAJAYAJAYAJAYAJAYAJAYAJAYAJAY"
-            - "--zebrium.max-queue-depth=2"
+            {{- if eq .Values.zebrium.verifySSL false }}
             - "--zebrium.insecure-ssl"
+            {{- end }}
           ports:
             - containerPort: 9090
           env:
@@ -46,6 +45,8 @@ spec:
                   key: auth-token
             - name: ZE_DEPLOYMENT_NAME
               value: "{{ .Values.zebrium.deployment }}"
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
           volumeMounts:
             - name: prometheus-config-volume
               mountPath: /etc/prometheus/
