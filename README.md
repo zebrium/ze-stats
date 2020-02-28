@@ -1,12 +1,19 @@
-# KUBERNETES STATS COLLECTOR DETAILS
-Zebrium's Kubernetes stats collector sends stats to Zebrium for automated Anomaly detection.
+---
+layout: page
+title: Kubernetes Metrics Collector
+parent: Setup
+nav_order: 1
+---
+
+# KUBERNETES METRICS COLLECTOR DETAILS
+Zebrium's Kubernetes metrics collector sends metrics to Zebrium for automated Anomaly detection.
 Our github repository is located [here](https://github.com/zebrium/ze-stats).
 
 # ze-stats
 ## Features
 * One step deployment using helm commands
-* Sends stats from all nodes in a Kubernetes clusters
-* Runs a single instance of the stats collector in a Kubernetes cluster, and runs node-exporter on every node in the same kubernetes cluster.
+* Sends metrics from all nodes in a Kubernetes cluster
+* Runs a single instance of the metrics collector in a Kubernetes cluster, and runs node-exporter on every node in the same Kubernetes cluster.
 
 ## Getting Started
 ### Installing via helm
@@ -28,10 +35,10 @@ helm delete --purge zstats-collector
 No special configuration is required
 
 ### Setup
-By default, Zebrium's kubernetes stats collector will be deployed to all Nodes in your cluster and collect stats from every node.
+By default, Zebrium's Kubernetes metrics collector will be deployed to all Nodes in your cluster and collect metrics from every node.
 
 ## Testing your installation
-Once the collector has been deployed in your Kubernetes environment, your stats and anomaly detection will be available in the Zebrium UI.
+Once the collector has been deployed in your Kubernetes environment, your metrics and anomaly detection will be available in the Zebrium UI.
 
 ## Contributors
 * Anil Nanduri (Zebrium)
