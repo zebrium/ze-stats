@@ -17,7 +17,7 @@ Our github repository is located [here](https://github.com/zebrium/ze-stats).
 1. `kubectl create namespace zebrium`
 2. `helm install zstats-collector zstats --namespace zebrium --repo https://raw.githubusercontent.com/zebrium/ze-stats/master/charts --set zebrium.collectorUrl=YOUR_ZE_STATS_API_URL,zebrium.authToken=YOUR_ZE_API_AUTH_TOKEN,zebrium.deployment=YOUR_DEPLOYMENT_NAME`
 
-*IMPORTANT* The two helm commands for version 2 and version 3 above, install node-exporter pods automatically on all nodes. If node-exporter is already installed in the kubernetes cluster, the helm command line option `nodeExporter.enabled=false` should be used to avoid duplicated node-exporter deployments.
+**IMPORTANT:** The two helm commands for version 2 and version 3 above, install node-exporter pods automatically on all nodes. If node-exporter is already installed in the kubernetes cluster, the helm command line option `nodeExporter.enabled=false` should be used to avoid duplicated node-exporter deployments.
 
 ### Uninstalling via helm
 
