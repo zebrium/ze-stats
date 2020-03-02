@@ -5,9 +5,8 @@ metadata:
   annotations:
     prometheus.io/scrape: 'true'
   labels:
-    app: node-exporter
-    name: node-exporter
-  name: node-exporter
+    app: {{ template "zstats-collector.name" . }}-node-exporter
+  name: {{ template "zstats-collector.fullname" . }}-node-exporter
 spec:
   clusterIP: None
   ports:
@@ -16,19 +15,22 @@ spec:
     targetPort: {{ .Values.nodeExporter.targetPort }}
     protocol: TCP
   selector:
-    app: node-exporter
+    app: {{ template "zstats-collector.name" . }}-node-exporter
   type: ClusterIP
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: node-exporter
+  name: {{ template "zstats-collector.fullname" . }}-node-exporter
 spec:
+  selector:
+    matchLabels:
+      app: {{ template "zstats-collector.name" . }}-node-exporter
   template:
     metadata:
       labels:
-        app: node-exporter
-      name: node-exporter
+        app: {{ template "zstats-collector.name" . }}-node-exporter
+      name: {{ template "zstats-collector.fullname" . }}-node-exporter
     spec:
       containers:
       - name: node-exporter
