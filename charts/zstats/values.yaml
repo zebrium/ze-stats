@@ -23,7 +23,7 @@ zebrium:
   deployment: ""
   collectorUrl: ""
   authToken: ""
-  autoupdate: "0"
+  autoupdate: "1"
   verifySSL: true
   name: zstats-collector
 
