@@ -36,7 +36,7 @@ helm delete --purge zstats-collector
 No special configuration is required
 
 ### Setup
-By default, Zebrium's Kubernetes metrics collector will be deployed to all Nodes in your cluster and collect metrics from every node.
+No special setup is required. By default Zebrium's Kubernetes metrics collector and collect metrics from every node.
 
 ## Testing your installation
 Once the collector has been deployed in your Kubernetes environment, your metrics and anomaly detection will be available in the Zebrium UI.
