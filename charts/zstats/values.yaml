@@ -7,18 +7,6 @@ prometheus:
   scrapeInterval: "30s"
   evaluationInterval: "60s"
 
-nodeExporter:
-  enabled: true
-  port: 9101
-  targetPort: 9101
-  resources:
-    requests:
-      cpu: 50m
-      memory: 64Mi
-    limits:
-      cpu: 200m
-      memory: 128Mi
-
 zebrium:
   deployment: ""
   collectorUrl: ""
