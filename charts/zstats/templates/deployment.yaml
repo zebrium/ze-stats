@@ -31,6 +31,9 @@ spec:
           args:
             - "--config.file=/etc/prometheus/prometheus.yml"
             - "--storage.tsdb.path=/prometheus/"
+            {{- if .Values.zebrium.enableDebug }}
+            - "--log.level=debug"
+            {{- end }}
             {{- if eq .Values.zebrium.verifySSL false }}
             - "--zebrium.insecure-ssl"
             {{- end }}

@@ -13,6 +13,7 @@ zebrium:
   authToken: ""
   autoupdate: "1"
   verifySSL: true
+  enableDebug: false
   name: zstats-collector
 
 resources:
