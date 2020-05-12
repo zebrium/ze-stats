@@ -1,0 +1,18 @@
+version: '3.5'
+
+services:
+  prometheus:
+    image: zebrium/zstats:latest
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus/data:/prometheus
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus/"
+    ports:
+      - 9090:9090
+    environment:
+      ZE_STATS_COLLECTOR_URL: "YOUR_ZE_STATS_API_URL"
+      ZE_STATS_COLLECTOR_TOKEN: "YOUR_ZE_API_AUTH_TOKEN"
+      ZE_DEPLOYMENT_NAME: "YOUR_DEPLOYMENT_NAME"
+    restart: always

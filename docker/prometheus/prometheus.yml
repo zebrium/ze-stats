@@ -1,0 +1,12 @@
+global:
+  scrape_interval: "30s"
+  evaluation_interval: "60s"
+scrape_configs:
+  - job_name: 'TARGET_JOB_NAME'
+    scrape_interval: "30s"
+    static_configs:
+      - targets: ['TARGET_IPADDR:TARGET_PORT']
+        labels:
+          host: 'TARGET_HOSTNAME'
+          ze_deployment_name: 'DEPLOYMENT_NAME'
+
