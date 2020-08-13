@@ -26,6 +26,17 @@ data:
           regex: (.+)
           target_label: __metrics_path__
           replacement: /api/v1/nodes/${1}/proxy/metrics/cadvisor
+        metric_relabel_configs:
+        - source_labels: [namespace]
+          regex: '(kube-.+|zebrium.*|istio-system|monitoring|^$)'
+          action: drop
+        - source_labels: [container]
+          regex: '(^$)'
+          action: drop
+        - source_labels: [__name__]
+          regex: '(container_cpu_load.+|container_cpu_(system|usage|user)_seconds_total|container_fs_(reads?|writes?)_(seconds|bytes|total).*|container_memory_(rss|swap|usage).*|container_network_(receive|transmit).+|container_tasks_s
+tate)'
+          action: keep
 
       - job_name: 'kubernetes-service-endpoints'
         kubernetes_sd_configs:
@@ -55,3 +66,7 @@ data:
         - source_labels: [__meta_kubernetes_service_name]
           action: replace
           target_label: kubernetes_name
+        metric_relabel_configs:
+        - source_labels: [__name__]
+          regex: '(node_cpu_seconds_.+|node_disk_.+|node_filesystem_.+|node_memory_.+|node_vmstat_.+)'
+          action: keep
