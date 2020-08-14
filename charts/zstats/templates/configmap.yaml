@@ -34,8 +34,7 @@ data:
           regex: '(^$)'
           action: drop
         - source_labels: [__name__]
-          regex: '(container_cpu_load.+|container_cpu_(system|usage|user)_seconds_total|container_fs_(reads?|writes?)_(seconds|bytes|total).*|container_memory_(rss|swap|usage).*|container_network_(receive|transmit).+|container_tasks_s
-tate)'
+          regex: '(container_cpu_load.+|container_cpu_(system|usage|user)_seconds_total|container_fs_(reads?|writes?)_(seconds|bytes|total).*|container_memory_(rss|swap|usage).*|container_network_(receive|transmit).+|container_tasks_state)'
           action: keep
 
       - job_name: 'kubernetes-service-endpoints'
