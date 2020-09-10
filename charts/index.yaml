@@ -2,10 +2,10 @@ apiVersion: v1
 entries:
   zstats:
   - apiVersion: v1
-    appVersion: 1.39.0
-    created: 2020-08-28T13:51:48.017625819-07:00
+    appVersion: 1.40.0
+    created: 2020-09-10T14:40:11.959565631-07:00
     description: Zebrium stats collector for Kubernetes.
-    digest: 820111342e9696946f9e815a90483d4d1621bfb72a4089509355a345fa0ad849
+    digest: a91e028bd3052bdce24b1e060b23dce12aa72ef55b978ad42ed0de145cbefba0
     home: https://www.zebrium.com
     icon: https://www.zebrium.com/hubfs/logo2.png
     keywords:
@@ -20,6 +20,6 @@ entries:
     sources:
     - https://github.com/zebrium/ze-stats
     urls:
-    - https://github.com/zebrium/ze-stats/releases/download/1.39.0/zstats-1.39.0.tgz
-    version: 1.39.0
-generated: 2020-08-28T13:51:48.017299339-07:00
+    - https://github.com/zebrium/ze-stats/releases/download/1.40.0/zstats-1.40.0.tgz
+    version: 1.40.0
+generated: 2020-09-10T14:40:11.959277883-07:00
