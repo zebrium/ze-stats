@@ -41,22 +41,15 @@ data:
         kubernetes_sd_configs:
         - role: endpoints
         relabel_configs:
+        {{- if .Values.zebrium.prometheusIoScrapeEnabled }}
+        - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_scrape]
+          action: keep
+          regex: true
+        {{- else }}
         - source_labels: [__meta_kubernetes_service_annotation_prometheus_zebrium_io_scrape]
           action: keep
           regex: true
-        - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_scheme]
-          action: replace
-          target_label: __scheme__
-          regex: (https?)
-        - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_path]
-          action: replace
-          target_label: __metrics_path__
-          regex: (.+)
-        - source_labels: [__address__, __meta_kubernetes_service_annotation_prometheus_io_port]
-          action: replace
-          target_label: __address__
-          regex: ([^:]+)(?::\d+)?;(\d+)
-          replacement: $1:$2
+        {{- end }}
         - action: labelmap
           regex: __meta_kubernetes_service_label_(.+)
         - source_labels: [__meta_kubernetes_namespace]
@@ -69,3 +62,25 @@ data:
         - source_labels: [__name__]
           regex: '(node_cpu_seconds_.+|node_disk_.+|node_filesystem_.+|node_memory_.+|node_vmstat_.+)'
           action: keep
+
+      - job_name: 'custom-service-endpoints'
+        kubernetes_sd_configs:
+        - role: endpoints
+        relabel_configs:
+        {{- if .Values.zebrium.prometheusIoScrapeEnabled }}
+        - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_scrape]
+          action: keep
+          regex: true
+        {{- else }}
+        - source_labels: [__meta_kubernetes_service_annotation_prometheus_zebrium_custom_scrape]
+          action: keep
+          regex: true
+        {{- end }}
+        - action: labelmap
+          regex: __meta_kubernetes_service_label_(.+)
+        - source_labels: [__meta_kubernetes_namespace]
+          action: replace
+          target_label: kubernetes_namespace
+        - source_labels: [__meta_kubernetes_service_name]
+          action: replace
+          target_label: kubernetes_name
