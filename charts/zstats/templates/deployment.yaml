@@ -52,6 +52,9 @@ spec:
                   key: auth-token
             - name: ZE_DEPLOYMENT_NAME
               value: "{{ .Values.zebrium.deployment }}"
+{{ if .Values.prometheus.extraEnv }}
+            {{- toYaml .Values.prometheus.extraEnv | indent 12 }}
+{{- end }}
           resources:
 {{ toYaml .Values.resources | indent 12 }}
           volumeMounts:
