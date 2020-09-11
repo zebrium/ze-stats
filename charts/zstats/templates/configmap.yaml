@@ -84,3 +84,7 @@ data:
         - source_labels: [__meta_kubernetes_service_name]
           action: replace
           target_label: kubernetes_name
+
+{{ if .Values.prometheus.staticJobConfigs }}
+      {{- toYaml .Values.prometheus.staticJobConfigs | indent 6 }}
+{{- end }}
