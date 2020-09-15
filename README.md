@@ -35,7 +35,18 @@ helm delete --purge zstats-collector
 ```
 
 ## Configuration
-No special configuration is required
+For existing node-exporter deployment, please follow the instructions below to add Zebrium specific annotation:
+1. Find out node-exporter service name:
+```
+kubectl get services --namespace NODE_EXPORTER_NAMESPACE
+```
+2. `kubectl annotate service NODE_EXPORTER_SERVICE_NAME prometheus.zebrium.io/scrape=true --namespace NODE_EXPORTER_NAMESPACE`
+
+For custom metrics, please run the command below to add Zebrium specific annotation for custom metrics:
+```
+kubectl annotate service CUSTOM_METRICS_SERVICE_NAME prometheus.zebrium.custom/scrape=true --namespace NAMESPACE
+```
+
 
 ### Setup
 No special setup is required. By default Zebrium's Kubernetes metrics collector and collect metrics from every node.
