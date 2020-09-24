@@ -35,6 +35,8 @@ helm delete --purge zstats-collector
 ```
 
 ## Configuration
+The Kubernetes metrics collector requires **4GiB memory for every 100 nodes** in your Kubernetes Cluster.
+
 For existing node-exporter deployment, please follow the instructions below to add Zebrium specific annotation:
 1. Find out node-exporter service name:
 ```
