@@ -13,7 +13,7 @@ Our github repository is located [here](https://github.com/zebrium/ze-stats).
 #### helm version 2
 1. If node-exporter has not been installed, install it first:
 ```
-  helm install --set-string service.annotations."prometheus\.io/scrape"=true --set-string service.annotations."prometheus\.zebrium\.io/scrape"=true --namespace zebrium --name node-exporter stable/prometheus-node-exporter
+  helm install --namespace zebrium --name node-exporter stable/prometheus-node-exporter
 ```
 2. `helm install --namespace zebrium  --name zstats-collector --repo https://raw.githubusercontent.com/zebrium/ze-stats/master/charts zstats --set zebrium.collectorUrl=YOUR_ZE_STATS_API_URL,zebrium.authToken=YOUR_ZE_API_AUTH_TOKEN,zebrium.deployment=YOUR_DEPLOYMENT_NAME`
 
@@ -23,7 +23,7 @@ Our github repository is located [here](https://github.com/zebrium/ze-stats).
 ```
   helm repo add stable https://kubernetes-charts.storage.googleapis.com/
   helm repo update
-  helm install node-exporter --set-string service.annotations."prometheus\.io/scrape"=true --set-string service.annotations."prometheus\.zebrium\.io/scrape"=true --namespace zebrium stable/prometheus-node-exporter
+  helm install node-exporter --namespace zebrium stable/prometheus-node-exporter
 ```
 3. `helm install zstats-collector zstats --namespace zebrium --repo https://raw.githubusercontent.com/zebrium/ze-stats/master/charts --set zebrium.collectorUrl=YOUR_ZE_STATS_API_URL,zebrium.authToken=YOUR_ZE_API_AUTH_TOKEN,zebrium.deployment=YOUR_DEPLOYMENT_NAME`
 
@@ -36,13 +36,6 @@ helm delete --purge zstats-collector
 
 ## Configuration
 The Kubernetes metrics collector requires **4GiB memory for every 100 nodes** in your Kubernetes Cluster.
-
-For existing node-exporter deployment, please follow the instructions below to add Zebrium specific annotation:
-1. Find out node-exporter service name:
-```
-kubectl get services --namespace NODE_EXPORTER_NAMESPACE
-```
-2. `kubectl annotate service NODE_EXPORTER_SERVICE_NAME prometheus.zebrium.io/scrape=true --namespace NODE_EXPORTER_NAMESPACE`
 
 For custom metrics, please run the command below to add Zebrium specific annotation for custom metrics:
 ```
