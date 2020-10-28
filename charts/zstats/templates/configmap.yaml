@@ -41,15 +41,9 @@ data:
         kubernetes_sd_configs:
         - role: endpoints
         relabel_configs:
-        {{- if .Values.zebrium.prometheusIoScrapeEnabled }}
         - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_scrape]
           action: keep
           regex: true
-        {{- else }}
-        - source_labels: [__meta_kubernetes_service_annotation_prometheus_zebrium_io_scrape]
-          action: keep
-          regex: true
-        {{- end }}
         - action: labelmap
           regex: __meta_kubernetes_service_label_(.+)
         - source_labels: [__meta_kubernetes_namespace]
@@ -67,15 +61,9 @@ data:
         kubernetes_sd_configs:
         - role: endpoints
         relabel_configs:
-        {{- if .Values.zebrium.prometheusIoScrapeEnabled }}
-        - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_scrape]
-          action: keep
-          regex: true
-        {{- else }}
         - source_labels: [__meta_kubernetes_service_annotation_prometheus_zebrium_custom_scrape]
           action: keep
           regex: true
-        {{- end }}
         - action: labelmap
           regex: __meta_kubernetes_service_label_(.+)
         - source_labels: [__meta_kubernetes_namespace]

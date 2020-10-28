@@ -13,7 +13,6 @@ zebrium:
   authToken: ""
   autoupdate: "1"
   verifySSL: true
-  prometheusIoScrapeEnabled: false
   enableDebug: false
   name: zstats-collector
 
