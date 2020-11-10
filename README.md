@@ -21,7 +21,7 @@ Our github repository is located [here](https://github.com/zebrium/ze-stats).
 1. `kubectl create namespace zebrium`
 2. If node-exporter has not been installed, install it first:
 ```
-  helm repo add stable https://kubernetes-charts.storage.googleapis.com/
+  helm repo add stable https://charts.helm.sh/stable
   helm repo update
   helm install node-exporter --namespace zebrium stable/prometheus-node-exporter
 ```
