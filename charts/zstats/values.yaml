@@ -8,7 +8,7 @@ prometheus:
   evaluationInterval: "60s"
 
 zebrium:
-  deployment: ""
+  deployment: "default"
   collectorUrl: ""
   authToken: ""
   autoupdate: "1"
