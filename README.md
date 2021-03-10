@@ -13,6 +13,8 @@ Our github repository is located [here](https://github.com/zebrium/ze-stats).
 #### helm version 2
 1. If node-exporter has not been installed, install it first:
 ```
+  helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+  helm repo update
   helm install --namespace zebrium --name node-exporter stable/prometheus-node-exporter
 ```
 2. `helm install --namespace zebrium  --name zstats-collector --repo https://raw.githubusercontent.com/zebrium/ze-stats/master/charts zstats --set zebrium.collectorUrl=YOUR_ZE_STATS_API_URL,zebrium.authToken=YOUR_ZE_API_AUTH_TOKEN,zebrium.deployment=YOUR_DEPLOYMENT_NAME`
@@ -23,7 +25,7 @@ Please note TCP port 9100 must be accessible from other kubernetes nodes in the 
 1. `kubectl create namespace zebrium`
 2. If node-exporter has not been installed, install it first:
 ```
-  helm repo add stable https://charts.helm.sh/stable
+  helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
   helm repo update
   helm install node-exporter --namespace zebrium stable/prometheus-node-exporter
 ```
